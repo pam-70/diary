@@ -1,0 +1,171 @@
+echo "# oxrtrud" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/pam-70/oxrtrud.git
+git push -u origin main
+
+
+
+Делаем какие то записи
+git fetch забираем с гита в папку гита
+git pull вносим изменения в проект
+
+
+git add .
+git commit -m "prob1"
+git push
+
+php artisan make:model Institution -m      создание и модели и миграции
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:rollback --step=5
+php artisan migrate:reset отменит
+php artisan migrate:refresh  перезагрузит
+php artisan migrate:fresh не знаю
+echo "# oxrtrud" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/pam-70/oxrtrud.git
+git push -u origin main
+----------------------------------------------------------
+composer update
+git add composer.lock       добавление изменнений в vendor
+git commit -m "Update some libs"
+git push
+
+На другой машине
+
+git pull
+composer install
+
+-------------------------------------------------------
+'timezone' => 'Europe/Moscow', часовая зона config/app.php
+ ----------------------------------------------------------
+Делаем какие то записи
+git fetch забираем с гита в папку гита
+git pull вносим изменения в проект
+
+
+git add .
+git commit -m "prob1"
+git push
+git push --set-upstream origin nout
+
+
+https://laravel.su/docs/8.x/migrations
+php artisan make:migration create_users_table
+
+php artisan make:migration add_dob_to_users
+composer require doctrine/dbal:2.* чтобы добавлять столбцы
+
+
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:rollback --step=5
+php artisan migrate:reset
+php artisan migrate:refresh
+
+
+
+-----------------------------------
+composer require laravel/ui:^2.4
+php artisan ui vue --auth
+npm install 
+npm run dev
+npm run watch
+npm run watch-poll
+node -v
+npm -v
+npm install
+npm install --no-bin-links
+// Запустить все задачи Mix...
+npm run dev
+// Запустить все задачи Mix и минифицировать вывод...
+npm run production
+npm run watch
+npm run watch-poll
+---------------------------------------
+в пдф
+composer require barryvdh/laravel-dompdf
+composer fund
+Открываем config/app.php и добавляем ServiceProvider в массив провайдеров, заодно в этом же файле добавим алиас:
+...
+'providers' => [
+    /*
+     * Package Service Providers...
+     */
+    Barryvdh\DomPDF\ServiceProvider::class,    
+],
+...
+'aliases' => [
+    ...
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+]
+
+
+
+---------------------------------------
+форматирование кода доступно в VS Code через следующие ярлыки:
+
+На Windows Shift + Alt + F
+--------------------------------------
+
+
+
+
+
+---------------------------------------------------PDF
+ npm install pdfmake --save-dev
+И импортируйте и используйте его следующим образом
+
+<template>....</template>
+<script>
+    var pdfMake = require('pdfmake/build/pdfmake.js');
+    var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+    export default{ 
+
+        data() {
+            return {
+              tableData: [],
+              checkedRows: [],
+              columns: [
+                   'selected',
+                   'sku',
+               ],
+
+            options: {
+
+                     }
+           },
+         methods: {
+
+                            createPDF() {
+        var docDefinition = {
+        content: [
+            {
+                table: {
+                    headerRows: 1,
+                    widths: [ '*', 'auto', 100, '*' ],
+
+                    body: []
+                }
+            }
+        ]
+        };
+        docDefinition.content[0].table.body.push(this.columns);
+        for(var i=0;i<this.checkedRows.length;i++){
+            docDefinition.content[0].table.body.push(Object.values(this.checkedRows[i]));  
+        }
+        pdfMake.createPdf(docDefinition).download('PO.pdf');
+    }
+
+
+
+    }
+     }
