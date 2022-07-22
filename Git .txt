@@ -32,8 +32,11 @@ git branch -M main
 git remote add origin https://github.com/pam-70/oxrtrud.git
 git push -u origin main
 ----------------------------------------------------------
+Загрузка с github
 composer update
-git add composer.lock       добавление изменнений в vendor
+Переименовать .env.example в .env
+php artisan key:generate
+git add composer.lock       добавление изменнений в vendor возможно не нужно
 git commit -m "Update some libs"
 git push
 
@@ -52,8 +55,11 @@ git pull вносим изменения в проект
 
 git add .
 git commit -m "prob1"
+  git config --global user.email "pam-70@mail.ru"
+  git config --global user.name "pam-70"
 git push
 git push --set-upstream origin nout
+
 
 
 https://laravel.su/docs/8.x/migrations
