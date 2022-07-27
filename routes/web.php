@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::match(['get', 'post'], '/post_update', ['as' => 'post_update', 'uses' => 'DiaryController@update']);//post_update

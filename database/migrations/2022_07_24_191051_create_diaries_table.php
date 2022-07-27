@@ -15,6 +15,12 @@ class CreateDiariesTable extends Migration
     {
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->date('date')->nullable();
+            $table->time('time')->nullable();
+            $table->string('topic',100)->nullable();// тема
+            $table->text('messages')->nullable();// сообщение
+            $table->json('json_messaget')->nullable();
             $table->timestamps();
         });
     }

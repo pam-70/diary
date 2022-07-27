@@ -1968,6 +1968,161 @@ __webpack_require__.r(__webpack_exports__);
     this.update(); //this.addanswer();
   },
   methods: {
+    update: function update() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/post_update").then(function (response) {
+        console.log(response.data.url_update); // this.istitutation = response.data.url_update;
+      });
+    },
+    print_result: function print_result(rez_id) {
+      console.log(rez_id);
+      var data_form = {
+        id_result: rez_id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/print_result", data_form).then(function (response) {// console.log(response.data.url_i);
+      });
+    },
+    filtersurname: function filtersurname() {
+      var _this = this;
+
+      var data_form = {
+        id_institution: this.selected,
+        asc: this.asc,
+        del: this.del,
+        surname: this.lastin
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/filter_surname", data_form).then(function (response) {
+        _this.institution = response.data.url_institution;
+      });
+    },
+    admin_result: function admin_result(id) {
+      var _this2 = this;
+
+      var data_form = {
+        user_id: id,
+        choice: this.choice
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/admin_result", data_form).then(function (response) {
+        // console.log(response.data.url_surnameres);
+        _this2.rezult = response.data.url_rezult;
+        _this2.surnameres = response.data.url_surnameres; //this.surname = response.data.url_user;
+      });
+    },
+    swon_user: function swon_user(id) {
+      var _this3 = this;
+
+      this.bat = "Сохранить";
+      this.user_id = id;
+      var data_form = {
+        user_id: id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/swon_user", data_form).then(function (response) {
+        _this3.user_id = response.data.url_user_id;
+        _this3.surname = response.data.url_user;
+      });
+    },
+    addlist: function addlist() {
+      if (this.bat === "Добавить") {
+        var data_form = {
+          id_institution: this.selected,
+          surname: this.surname
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/add_user", data_form).then(function (response) {});
+      }
+
+      if (this.bat === "Сохранить") {
+        //console.log("Сработало сохранить");
+        var _data_form = {
+          id_institution: this.selected,
+          surname: this.surname,
+          del: this.del,
+          user_id: this.user_id
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/updat_user", _data_form).then(function (response) {});
+      }
+
+      this.showlist();
+    },
+    namebat: function namebat() {
+      this.bat = "Добавить";
+    },
+    showlist: function showlist() {
+      var _this4 = this;
+
+      this.istitut_id = this.selected;
+      var data_form = {
+        id_institution: this.selected,
+        asc: this.asc,
+        del: this.del
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/show_list", data_form).then(function (response) {
+        _this4.institution = response.data.url_institution;
+      });
+    },
+    lists: function lists() {
+      this.currentTab = "lists";
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProbComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProbComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //import jspdf from 'jspdf';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      day: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
+      currentTab: "lists",
+      istitutation: [],
+      selected: "",
+      institution: [],
+      surname: "",
+      surnameres: "",
+      asc: 1,
+      del: 0,
+      bat: "Сохранить",
+      user_id: "",
+      choice: 1,
+      rezult: [],
+      lastin: "",
+      fsurname: "",
+      html: "",
+      istitut_id: ""
+    };
+  },
+  mounted: function mounted() {
+    // this.selectedLang = this.items[0].value;
+    this.update(); //this.addanswer();
+  },
+  methods: {
     print_result: function print_result(rez_id) {
       console.log(rez_id);
       var data_form = {
@@ -2063,23 +2218,6 @@ __webpack_require__.r(__webpack_exports__);
     lists: function lists() {
       this.currentTab = "lists";
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
   }
 });
 
@@ -2254,6 +2392,1520 @@ var staticRenderFns = [function () {
   }, [_vm._v("Example Component")]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_vm._v("\n                    I'm an example component.uyuyuyuyu\n                ")])])])])]);
+}];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-lg-9"
+  }, [_c("div", {
+    staticClass: "mt-4 mt-lg-0"
+  }, [_c("div", {
+    staticClass: "fc fc-media-screen fc-direction-ltr fc-theme-bootstrap",
+    staticStyle: {
+      height: "769px"
+    },
+    attrs: {
+      id: "calendar"
+    }
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "fc-view-harness fc-view-harness-active",
+    attrs: {
+      "aria-labelledby": "fc-dom-1"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid fc-dayGridMonth-view fc-view"
+  }, [_c("table", {
+    staticClass: "fc-scrollgrid table-bordered fc-scrollgrid-liquid",
+    attrs: {
+      role: "grid"
+    }
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    attrs: {
+      role: "rowgroup"
+    }
+  }, [_c("tr", {
+    staticClass: "fc-scrollgrid-section fc-scrollgrid-section-body fc-scrollgrid-section-liquid",
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("td", {
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("div", {
+    staticClass: "fc-scroller-harness fc-scroller-harness-liquid"
+  }, [_c("div", {
+    staticClass: "fc-scroller fc-scroller-liquid-absolute",
+    staticStyle: {
+      overflow: "hidden auto"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-body fc-daygrid-body-unbalanced",
+    staticStyle: {
+      width: "1165px"
+    }
+  }, [_c("table", {
+    staticClass: "fc-scrollgrid-sync-table",
+    staticStyle: {
+      width: "1165px",
+      height: "665px"
+    },
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("colgroup"), _vm._v(" "), _c("tbody", {
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[0]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[1]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[2]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[3]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[4]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                         " + _vm._s(_vm.day[5]) + "\n                                        ")])])])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n                                          " + _vm._s(_vm.day[6]) + "\n                                        ")])])])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7)])])])])])])])])])])])])])])])]);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "fc-header-toolbar fc-toolbar fc-toolbar-ltr"
+  }, [_c("div", {
+    staticClass: "fc-toolbar-chunk"
+  }, [_c("div", {
+    staticClass: "btn-group"
+  }, [_c("button", {
+    staticClass: "fc-prev-button btn btn-primary",
+    attrs: {
+      type: "button",
+      title: "Previous Month",
+      "aria-pressed": "false"
+    }
+  }, [_vm._v("\n                  Выход\n                ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-toolbar-chunk"
+  }, [_c("h2", {
+    staticClass: "fc-toolbar-title",
+    attrs: {
+      id: "fc-dom-1"
+    }
+  }, [_vm._v("Июль 2022")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-toolbar-chunk"
+  }, [_c("div", {
+    staticClass: "btn-group"
+  }, [_c("button", {
+    staticClass: "fc-dayGridMonth-button btn btn-primary active",
+    attrs: {
+      type: "button",
+      title: "Month view",
+      "aria-pressed": "true"
+    }
+  }, [_vm._v("\n                  Месяц\n                ")]), _vm._v(" "), _c("button", {
+    staticClass: "fc-timeGridWeek-button btn btn-primary",
+    attrs: {
+      type: "button",
+      title: "Week view",
+      "aria-pressed": "false"
+    }
+  }, [_vm._v("\n                  -\n                ")]), _vm._v(" "), _c("button", {
+    staticClass: "fc-timeGridDay-button btn btn-primary",
+    attrs: {
+      type: "button",
+      title: "Day view",
+      "aria-pressed": "false"
+    }
+  }, [_vm._v("\n                  +\n                ")])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    attrs: {
+      role: "rowgroup"
+    }
+  }, [_c("tr", {
+    staticClass: "fc-scrollgrid-section fc-scrollgrid-section-header",
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("th", {
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("div", {
+    staticClass: "fc-scroller-harness"
+  }, [_c("div", {
+    staticClass: "fc-scroller",
+    staticStyle: {
+      overflow: "hidden"
+    }
+  }, [_c("table", {
+    staticClass: "fc-col-header",
+    staticStyle: {
+      width: "1165px"
+    },
+    attrs: {
+      role: "presentation"
+    }
+  }, [_c("colgroup"), _vm._v(" "), _c("thead", {
+    attrs: {
+      role: "presentation"
+    }
+  })])])])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-26",
+      "aria-labelledby": "fc-dom-206"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-206",
+      "aria-label": "June 26, 2022"
+    }
+  }, [_vm._v("26")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-27",
+      "aria-labelledby": "fc-dom-208"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-208",
+      "aria-label": "June 27, 2022"
+    }
+  }, [_vm._v("27")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-28",
+      "aria-labelledby": "fc-dom-210"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-210",
+      "aria-label": "June 28, 2022"
+    }
+  }, [_vm._v("28")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-29",
+      "aria-labelledby": "fc-dom-212"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-212",
+      "aria-label": "June 29, 2022"
+    }
+  }, [_vm._v("29")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-06-30",
+      "aria-labelledby": "fc-dom-214"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-214",
+      "aria-label": "June 30, 2022"
+    }
+  }, [_vm._v("30")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-01",
+      "aria-labelledby": "fc-dom-216"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-216",
+      "aria-label": "July 1, 2022"
+    }
+  }, [_vm._v("1")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-02",
+      "aria-labelledby": "fc-dom-218"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-218",
+      "aria-label": "July 2, 2022"
+    }
+  }, [_vm._v("2")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-03",
+      "aria-labelledby": "fc-dom-220"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-220",
+      "aria-label": "July 3, 2022"
+    }
+  }, [_vm._v("3")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-04",
+      "aria-labelledby": "fc-dom-222"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-222",
+      "aria-label": "July 4, 2022"
+    }
+  }, [_vm._v("4")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-05",
+      "aria-labelledby": "fc-dom-224"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-224",
+      "aria-label": "July 5, 2022"
+    }
+  }, [_vm._v("5")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-06",
+      "aria-labelledby": "fc-dom-226"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-226",
+      "aria-label": "July 6, 2022"
+    }
+  }, [_vm._v("6")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-07",
+      "aria-labelledby": "fc-dom-228"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-228",
+      "aria-label": "July 7, 2022"
+    }
+  }, [_vm._v("7")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-08",
+      "aria-labelledby": "fc-dom-230"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-230",
+      "aria-label": "July 8, 2022"
+    }
+  }, [_vm._v("8")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-past",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-09",
+      "aria-labelledby": "fc-dom-232"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-232",
+      "aria-label": "July 9, 2022"
+    }
+  }, [_vm._v("9")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-today",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-10",
+      "aria-labelledby": "fc-dom-234"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-234",
+      "aria-label": "July 10, 2022"
+    }
+  }, [_vm._v("10")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-event-harness",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  }, [_c("a", {
+    staticClass: "fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-today bg-danger",
+    attrs: {
+      tabindex: "0"
+    }
+  }, [_c("div", {
+    staticClass: "fc-event-main"
+  }, [_c("div", {
+    staticClass: "fc-event-main-frame"
+  }, [_c("div", {
+    staticClass: "fc-event-title-container"
+  }, [_c("div", {
+    staticClass: "fc-event-title fc-sticky"
+  }, [_vm._v("\n                                                    5 а - Сообщение\n                                                  ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-event-resizer fc-event-resizer-end"
+  }, [_vm._v("\n                                              появляющая надпись\n                                            ")])]), _vm._v(" "), _c("a", {
+    staticClass: "fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-today bg-danger",
+    attrs: {
+      tabindex: "0"
+    }
+  }, [_c("div", {
+    staticClass: "fc-event-main"
+  }, [_c("div", {
+    staticClass: "fc-event-main-frame"
+  }, [_c("div", {
+    staticClass: "fc-event-title-container"
+  }, [_c("div", {
+    staticClass: "fc-event-title fc-sticky"
+  }, [_vm._v("\n                                                    5 а - Сообщение222\n                                                  ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-event-resizer fc-event-resizer-end"
+  }, [_vm._v("\n                                              появляющая надпись2\n                                            ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-11",
+      "aria-labelledby": "fc-dom-236"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-236",
+      "aria-label": "July 11, 2022"
+    }
+  }, [_vm._v("11")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  }, [_vm._v("\n                                          44\n                                        ")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-12",
+      "aria-labelledby": "fc-dom-238"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-238",
+      "aria-label": "July 12, 2022"
+    }
+  }, [_vm._v("12")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-event-harness",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  }, [_c("a", {
+    staticClass: "fc-daygrid-event fc-daygrid-dot-event fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-future bg-info",
+    attrs: {
+      tabindex: "0"
+    }
+  }, [_c("div", {
+    staticClass: "fc-event-resizer fc-event-resizer-end"
+  }, [_vm._v("\n                                              появляющая надпись\n                                            ")]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-event-dot"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "fc-event-time"
+  }, [_vm._v("\n                                              7:53a\n                                            ")]), _vm._v(" "), _c("div", {
+    staticClass: "fc-event-title fc-sticky"
+  }, [_vm._v("\n                                              Завтрак\n                                            ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-13",
+      "aria-labelledby": "fc-dom-240"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-240",
+      "aria-label": "July 13, 2022"
+    }
+  }, [_vm._v("13")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-14",
+      "aria-labelledby": "fc-dom-242"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-242",
+      "aria-label": "July 14, 2022"
+    }
+  }, [_vm._v("14")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-event-harness fc-daygrid-event-harness-abs",
+    staticStyle: {
+      top: "0px",
+      left: "0px",
+      right: "-166.422px"
+    }
+  }, [_c("a", {
+    staticClass: "fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-draggable fc-event-start fc-event-end fc-event-future bg-primary",
+    attrs: {
+      tabindex: "0"
+    }
+  }, [_c("div", {
+    staticClass: "fc-event-main"
+  }, [_c("div", {
+    staticClass: "fc-event-main-frame"
+  }, [_c("div", {
+    staticClass: "fc-event-time"
+  }, [_vm._v("\n                                                  7:06a\n                                                ")]), _vm._v(" "), _c("div", {
+    staticClass: "fc-event-title-container"
+  }, [_c("div", {
+    staticClass: "fc-event-title fc-sticky"
+  }, [_vm._v("\n                                                    Buy Design Assets\n                                                  ")])])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "38px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-15",
+      "aria-labelledby": "fc-dom-244"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-244",
+      "aria-label": "July 15, 2022"
+    }
+  }, [_vm._v("15")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "38px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-16",
+      "aria-labelledby": "fc-dom-246"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-246",
+      "aria-label": "July 16, 2022"
+    }
+  }, [_vm._v("16")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-17",
+      "aria-labelledby": "fc-dom-248"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-248",
+      "aria-label": "July 17, 2022"
+    }
+  }, [_vm._v("17")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-18",
+      "aria-labelledby": "fc-dom-250"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-250",
+      "aria-label": "July 18, 2022"
+    }
+  }, [_vm._v("18")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-19",
+      "aria-labelledby": "fc-dom-252"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-252",
+      "aria-label": "July 19, 2022"
+    }
+  }, [_vm._v("19")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-20",
+      "aria-labelledby": "fc-dom-254"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-254",
+      "aria-label": "July 20, 2022"
+    }
+  }, [_vm._v("20")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-21",
+      "aria-labelledby": "fc-dom-256"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-256",
+      "aria-label": "July 21, 2022"
+    }
+  }, [_vm._v("21")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-22",
+      "aria-labelledby": "fc-dom-258"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-258",
+      "aria-label": "July 22, 2022"
+    }
+  }, [_vm._v("22")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-23",
+      "aria-labelledby": "fc-dom-260"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-260",
+      "aria-label": "July 23, 2022"
+    }
+  }, [_vm._v("23")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-24",
+      "aria-labelledby": "fc-dom-262"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-262",
+      "aria-label": "July 24, 2022"
+    }
+  }, [_vm._v("24")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-25",
+      "aria-labelledby": "fc-dom-264"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-264",
+      "aria-label": "July 25, 2022"
+    }
+  }, [_vm._v("25")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-26",
+      "aria-labelledby": "fc-dom-266"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-266",
+      "aria-label": "July 26, 2022"
+    }
+  }, [_vm._v("26")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-27",
+      "aria-labelledby": "fc-dom-268"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-268",
+      "aria-label": "July 27, 2022"
+    }
+  }, [_vm._v("27")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-28",
+      "aria-labelledby": "fc-dom-270"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-270",
+      "aria-label": "July 28, 2022"
+    }
+  }, [_vm._v("28")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-29",
+      "aria-labelledby": "fc-dom-272"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-272",
+      "aria-label": "July 29, 2022"
+    }
+  }, [_vm._v("29")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-30",
+      "aria-labelledby": "fc-dom-274"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-274",
+      "aria-label": "July 30, 2022"
+    }
+  }, [_vm._v("30")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", {
+    attrs: {
+      role: "row"
+    }
+  }, [_c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sun fc-day-future",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-07-31",
+      "aria-labelledby": "fc-dom-276"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-276",
+      "aria-label": "July 31, 2022"
+    }
+  }, [_vm._v("31")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-mon fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-01",
+      "aria-labelledby": "fc-dom-278"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-278",
+      "aria-label": "August 1, 2022"
+    }
+  }, [_vm._v("1")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-tue fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-02",
+      "aria-labelledby": "fc-dom-280"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-280",
+      "aria-label": "August 2, 2022"
+    }
+  }, [_vm._v("2")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-wed fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-03",
+      "aria-labelledby": "fc-dom-282"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-282",
+      "aria-label": "August 3, 2022"
+    }
+  }, [_vm._v("3")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-thu fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-04",
+      "aria-labelledby": "fc-dom-284"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-284",
+      "aria-label": "August 4, 2022"
+    }
+  }, [_vm._v("4")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-fri fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-05",
+      "aria-labelledby": "fc-dom-286"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-286",
+      "aria-label": "August 5, 2022"
+    }
+  }, [_vm._v("5")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])]), _vm._v(" "), _c("td", {
+    staticClass: "fc-daygrid-day fc-day fc-day-sat fc-day-future fc-day-other",
+    attrs: {
+      role: "gridcell",
+      "data-date": "2022-08-06",
+      "aria-labelledby": "fc-dom-288"
+    }
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-frame fc-scrollgrid-sync-inner"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-top"
+  }, [_c("a", {
+    staticClass: "fc-daygrid-day-number",
+    attrs: {
+      id: "fc-dom-288",
+      "aria-label": "August 6, 2022"
+    }
+  }, [_vm._v("6")])]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-events"
+  }, [_c("div", {
+    staticClass: "fc-daygrid-day-bottom",
+    staticStyle: {
+      "margin-top": "0px"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "fc-daygrid-day-bg"
+  })])])]);
 }];
 render._withStripped = true;
 
@@ -49758,6 +51410,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('diary-component', __webpack_require__(/*! ./components/DiaryComponent.vue */ "./resources/js/components/DiaryComponent.vue")["default"]);
+Vue.component('prob-component', __webpack_require__(/*! ./components/ProbComponent.vue */ "./resources/js/components/ProbComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49948,6 +51601,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ProbComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ProbComponent.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProbComponent.vue?vue&type=template&id=9f605e66& */ "./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66&");
+/* harmony import */ var _ProbComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProbComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ProbComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProbComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ProbComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ProbComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ProbComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProbComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ProbComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProbComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProbComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./ProbComponent.vue?vue&type=template&id=9f605e66& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProbComponent.vue?vue&type=template&id=9f605e66&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ProbComponent_vue_vue_type_template_id_9f605e66___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -17,7 +17,7 @@
             <p class="text-center">{{ str1.dt }}</p>
           </div>
           <div style="background-color: coral" v-else>
-            <p class="text-center">{{ str1.dt }}</p>
+            <p class="text-center">{{ str1.dt}}</p>
           </div>
         </td>
       </tr>
@@ -52,13 +52,13 @@ export default {
     return {
       day_m: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
       str1_m: [
-        { ms: 0, nd: 1, dt: 27 },
-        { ms: 0, nd: 2, dt: 28 },
-        { ms: 0, nd: 3, dt: 29 },
-        { ms: 0, nd: 4, dt: 30 },
-        { ms: 1, nd: 5, dt: 1 },
-        { ms: 1, nd: 6, dt: 2 },
-        { ms: 1, nd: 7, dt: 3 },
+        {ms:0, nd: 1, dt: 27 },
+        {ms:0, nd: 2, dt: 28 },
+        {ms:0, nd: 3, dt: 29 },
+        {ms:0, nd: 4, dt: 30 },
+        {ms:1, nd: 5, dt: 1 },
+        {ms:1, nd: 6, dt: 2 },
+        {ms:1, nd: 7, dt: 3 },
       ],
       currentTab: "lists",
       istitutation: [],
@@ -84,16 +84,6 @@ export default {
     //this.addanswer();
   },
   methods: {
-    update: function () {
-      axios.post("/post_update").then((response) => {
-        
-        console.log(response.data.url_update);
-       // this.istitutation = response.data.url_update;
-      });
-    },
-
-
-
     print_result: function (rez_id) {
       console.log(rez_id);
       const data_form = {
@@ -162,6 +152,11 @@ export default {
       this.bat = "Добавить";
     },
 
+    update: function () {
+      axios.post("/adm_updat").then((response) => {
+        this.istitutation = response.data.url_istitutation;
+      });
+    },
     showlist: function () {
       this.istitut_id = this.selected;
       const data_form = {
